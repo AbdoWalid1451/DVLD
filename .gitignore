@@ -1,0 +1,31 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build folders
+bin/
+obj/
+
+# NuGet
+packages/
+
+# Logs
+*.log
+
+# SQL Server
+*.mdf
+*.ldf
+*.bak
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Windows
+Thumbs.db
+Desktop.ini
