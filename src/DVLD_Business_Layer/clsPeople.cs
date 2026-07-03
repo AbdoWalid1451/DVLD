@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DVLD_Business_Layer
 {
-    public class clsPeople
+    public class clsPerson
     {
         enum enMode { Add, Update }
         public int ID { get; set; }
