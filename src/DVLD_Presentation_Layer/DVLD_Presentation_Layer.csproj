@@ -52,19 +52,19 @@
     <Compile Include="form1.Designer.cs">
       <DependentUpon>form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManagePeople.cs">
+    <Compile Include="frmManagePeople.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManagePeople.Designer.cs">
-      <DependentUpon>ManagePeople.cs</DependentUpon>
+    <Compile Include="frmManagePeople.Designer.cs">
+      <DependentUpon>frmManagePeople.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="form1.resx">
       <DependentUpon>form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManagePeople.resx">
-      <DependentUpon>ManagePeople.cs</DependentUpon>
+    <EmbeddedResource Include="frmManagePeople.resx">
+      <DependentUpon>frmManagePeople.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -103,6 +103,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Users 2 64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DVLD_Business_Layer\DVLD_Business_Layer.csproj">
+      <Project>{5a324baf-b065-4264-b59b-b1bccb1f8e1f}</Project>
+      <Name>DVLD_Business_Layer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

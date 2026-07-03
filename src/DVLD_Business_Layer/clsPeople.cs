@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DVLD_Business_Layer
 {
-    public class Class1
+    public class clsPeople
     {
     }
 }

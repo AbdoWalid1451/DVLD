@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace DVLD_Presentation_Layer
 {
-    public partial class ManagePeople : Form
+    public partial class frmManagePeople : Form
     {
-        public ManagePeople()
+        public frmManagePeople()
         {
             InitializeComponent();
+        }
+
+        private void frmManagePeople_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
