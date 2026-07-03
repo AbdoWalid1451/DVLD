@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD_Presentation_Layer", "DVLD_Presentation_Layer\DVLD_Presentation_Layer.csproj", "{16C3F7CF-19C7-4D7D-94ED-67349890C665}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD_Business_Layer", "DVLD_Business_Layer\DVLD_Business_Layer.csproj", "{5A324BAF-B065-4264-B59B-B1BCCB1F8E1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD_DataAccess_Layer", "DVLD_DataAccess_Layer\DVLD_DataAccess_Layer.csproj", "{F25F1DA9-ED0D-4C5E-A417-C829B3785CF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{16C3F7CF-19C7-4D7D-94ED-67349890C665}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16C3F7CF-19C7-4D7D-94ED-67349890C665}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16C3F7CF-19C7-4D7D-94ED-67349890C665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A324BAF-B065-4264-B59B-B1BCCB1F8E1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A324BAF-B065-4264-B59B-B1BCCB1F8E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A324BAF-B065-4264-B59B-B1BCCB1F8E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A324BAF-B065-4264-B59B-B1BCCB1F8E1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25F1DA9-ED0D-4C5E-A417-C829B3785CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25F1DA9-ED0D-4C5E-A417-C829B3785CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25F1DA9-ED0D-4C5E-A417-C829B3785CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25F1DA9-ED0D-4C5E-A417-C829B3785CF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
