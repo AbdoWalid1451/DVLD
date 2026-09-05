@@ -19,7 +19,9 @@ namespace DVLD_Presentation_Layer
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmManagePeople frmPeople = new frmManagePeople();
+            frmPeople.MdiParent = this;
+            frmPeople.Show();
         }
     }
 }
