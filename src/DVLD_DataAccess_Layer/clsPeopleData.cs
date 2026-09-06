@@ -13,7 +13,8 @@ namespace DVLD_DataAccess_Layer
         static public DataTable getAll()
         {
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
-            string query = "Select * from People ";
+            string query = "Select PersonID , NationalNo , FirstName ,SecondName,ThirdName,LastName ," +
+                " DateOfBirth, Gendor , Address ,Phone , Email From People ";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -44,7 +45,7 @@ namespace DVLD_DataAccess_Layer
 
         static public bool findByID(int PersonID,ref string NationalNo, ref string FName, ref string SName
                 , ref string TName, ref string LName,  ref DateTime DateOfBirth ,
-                ref bool Gendor, ref string Address
+                ref short Gendor, ref string Address
                 ,  ref string Phone,ref string Email, ref int NationalCountryID
                , ref string ImagePath)
         {
@@ -62,15 +63,17 @@ namespace DVLD_DataAccess_Layer
 
                 if (reader.Read())
                 {
+                    NationalNo = (string)reader["NationalNo"];
                     FName = (string)reader["FirstName"];
                     SName = (string)reader["SecondName"];
                     TName = (string)reader["ThirdName"];
                     LName = (string)reader["LastName"]; 
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gendor = (bool)reader["Gendor"];
+                    Gendor = (byte)reader["Gendor"];
                     Address = (string)reader["Address"];
                     Phone = (string)reader["Phone"];
-                    NationalCountryID = (int)reader["NationalCountryID"];
+                    Email = (string)reader["Email"];
+                    NationalCountryID = (int)reader["NationalityCountryID"];
        
                     if (reader["ImagePath"] == DBNull.Value)
                         ImagePath = null;
@@ -98,7 +101,7 @@ namespace DVLD_DataAccess_Layer
 
         static public int addNew( string NationalNo,  string FName,  string SName
                 ,  string TName,  string LName,   DateTime DateOfBirth,
-                 bool Gendor,  string Address
+                 short Gendor,  string Address
                 ,   string Phone,string Email,  int NationalityCountryID
                ,  string ImagePath)
         {
@@ -112,9 +115,10 @@ namespace DVLD_DataAccess_Layer
                 "Select Scope_Identity();";
 
             SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@NationalNo", NationalNo);
             cmd.Parameters.AddWithValue("@FirstName", FName);
-            cmd.Parameters.AddWithValue("@LastName", SName);
-            cmd.Parameters.AddWithValue("@LastName", TName);
+            cmd.Parameters.AddWithValue("@SecondName", SName);
+            cmd.Parameters.AddWithValue("@ThirdName", TName);
             cmd.Parameters.AddWithValue("@LastName", LName);
             cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
             cmd.Parameters.AddWithValue("@Gendor", Gendor);
@@ -157,13 +161,13 @@ namespace DVLD_DataAccess_Layer
         }
 
         static public bool Update(int PersonID,  string NationalNo,  string FName,  string SName
-                ,  string TName,  string LName,  DateTime DateOfBirth,  bool Gendor,  
+                ,  string TName,  string LName,  DateTime DateOfBirth,  short Gendor,  
             string Address,  string Phone,  string Email,  int NationalityCountryID,  string ImagePath)
         {
 
 
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
-            string query = @"Update Contacts 
+            string query = @"Update People 
                               set NationalNo = @NationalNo, 
                                 FirstName = @FirstName,
                                 SecondName = @SecondName,
@@ -180,6 +184,7 @@ namespace DVLD_DataAccess_Layer
 
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@PersonID", PersonID);
+            cmd.Parameters.AddWithValue("@NationalNo", NationalNo);
             cmd.Parameters.AddWithValue("@FirstName", FName);
             cmd.Parameters.AddWithValue("@SecondName", SName);
             cmd.Parameters.AddWithValue("@ThirdName", TName);

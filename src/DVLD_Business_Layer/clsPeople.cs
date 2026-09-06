@@ -22,7 +22,7 @@ namespace DVLD_Business_Layer
         public string ThirdName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public bool Gendor { get; set; }
+        public short Gendor { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -34,7 +34,7 @@ namespace DVLD_Business_Layer
 
         private clsPerson(int id,string NationalNo, string firstName, string secondName
             , string thirdName, string lastName,
-            DateTime dateOFBirth, bool gendor,  string address, string phone, string email
+            DateTime dateOFBirth, short gendor,  string address, string phone, string email
             ,int NationalityCountryID , string imagePath)
         {
             this.PersonID = id;
@@ -62,7 +62,7 @@ namespace DVLD_Business_Layer
             ThirdName = "";
             LastName = "";
             DateOfBirth = DateTime.Now;
-            Gendor = false;
+            Gendor = 0;
             Address = "";
             Phone = "";
             Email = "";
@@ -78,7 +78,7 @@ namespace DVLD_Business_Layer
             string NationalNo = "",
                 FName = "", SName = "", TName = "", LName = "", Email = "", Phone = "", Address = "";
             DateTime DateOfBirth = DateTime.Now; int NationalityCountryID = -1; string ImagePath = "";
-            bool Gendor = false;
+            short Gendor = 0;
 
 
             if (clsPeopleData.findByID( PersonID,ref NationalNo, ref  FName, ref  SName

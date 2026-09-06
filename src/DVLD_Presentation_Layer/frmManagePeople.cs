@@ -33,5 +33,44 @@ namespace DVLD_Presentation_Layer
         {
             this.Close(); 
         }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            frmSavePerson frm = new frmSavePerson(-1);
+            frm.ShowDialog();
+            _RefreshGridView();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvAllPeople.CurrentRow.Cells.Count > 0)
+            {
+                int id = (int)dgvAllPeople.CurrentRow.Cells[0].Value;
+                string name = dgvAllPeople.CurrentRow.Cells[1].Value.ToString() + " "
+                    + dgvAllPeople.CurrentRow.Cells[2].Value.ToString();
+
+                if (MessageBox.Show("Are You sure to delete " + name, "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    if (clsPerson.Delete(id))
+                    {
+                        MessageBox.Show("Deleted Successfully");
+                        _RefreshGridView();
+
+                    }
+                }
+            }
+
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvAllPeople.CurrentRow.Cells.Count > 0)
+            {
+                int id = (int)dgvAllPeople.CurrentRow.Cells[0].Value;
+                frmSavePerson frm = new frmSavePerson(id);
+                frm.ShowDialog();
+                _RefreshGridView();
+            }
+        }
     }
 }
