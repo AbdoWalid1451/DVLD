@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ctrlPersonInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctrlPersonInformation.Designer.cs">
+      <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="ctrlSavePerson.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -64,6 +70,12 @@
     <Compile Include="frmManagePeople.Designer.cs">
       <DependentUpon>frmManagePeople.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPersonDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPersonDetails.Designer.cs">
+      <DependentUpon>frmPersonDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSavePerson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +84,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ctrlPersonInformation.resx">
+      <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ctrlSavePerson.resx">
       <DependentUpon>ctrlSavePerson.cs</DependentUpon>
     </EmbeddedResource>
@@ -80,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmManagePeople.resx">
       <DependentUpon>frmManagePeople.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPersonDetails.resx">
+      <DependentUpon>frmPersonDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSavePerson.resx">
       <DependentUpon>frmSavePerson.cs</DependentUpon>

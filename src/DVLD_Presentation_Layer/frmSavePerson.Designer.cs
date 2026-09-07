@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSavePerson));
             this.lblAddEditPerson = new System.Windows.Forms.Label();
             this.ilblSetImage = new System.Windows.Forms.LinkLabel();
@@ -73,6 +74,7 @@
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.lblPersonID = new System.Windows.Forms.Label();
+            this.error = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -85,6 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAddEditPerson
@@ -116,6 +119,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(157, 15);
             this.txtPhone.TabIndex = 10;
+            this.txtPhone.Leave += new System.EventHandler(this.EmptyBoxValidatling);
             // 
             // label12
             // 
@@ -154,6 +158,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(157, 15);
             this.txtLastName.TabIndex = 4;
+            this.txtLastName.Leave += new System.EventHandler(this.EmptyBoxValidatling);
             // 
             // txtThirdName
             // 
@@ -162,6 +167,7 @@
             this.txtThirdName.Name = "txtThirdName";
             this.txtThirdName.Size = new System.Drawing.Size(157, 15);
             this.txtThirdName.TabIndex = 3;
+            this.txtThirdName.Leave += new System.EventHandler(this.EmptyBoxValidatling);
             // 
             // txtSecondName
             // 
@@ -170,6 +176,7 @@
             this.txtSecondName.Name = "txtSecondName";
             this.txtSecondName.Size = new System.Drawing.Size(157, 15);
             this.txtSecondName.TabIndex = 2;
+            this.txtSecondName.Leave += new System.EventHandler(this.EmptyBoxValidatling);
             // 
             // label9
             // 
@@ -214,6 +221,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(157, 15);
             this.txtFirstName.TabIndex = 1;
+            this.txtFirstName.Leave += new System.EventHandler(this.EmptyBoxValidatling);
             // 
             // txtAddress
             // 
@@ -223,6 +231,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(501, 98);
             this.txtAddress.TabIndex = 12;
+            this.txtAddress.Leave += new System.EventHandler(this.EmptyBoxValidatling);
             // 
             // txtEmail
             // 
@@ -231,6 +240,8 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(157, 15);
             this.txtEmail.TabIndex = 8;
+            this.txtEmail.Leave += new System.EventHandler(this.EmptyBoxValidatling);
+            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // txtNationalNo
             // 
@@ -239,6 +250,8 @@
             this.txtNationalNo.Name = "txtNationalNo";
             this.txtNationalNo.Size = new System.Drawing.Size(157, 15);
             this.txtNationalNo.TabIndex = 5;
+            this.txtNationalNo.Leave += new System.EventHandler(this.EmptyBoxValidatling);
+            this.txtNationalNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtNationalNo_Validating);
             // 
             // label5
             // 
@@ -457,11 +470,12 @@
             this.rbFemal.Tag = "1";
             this.rbFemal.Text = "Female";
             this.rbFemal.UseVisualStyleBackColor = true;
-            this.rbFemal.CheckedChanged += new System.EventHandler(this.ChangePicture);
+            this.rbFemal.CheckedChanged += new System.EventHandler(this.ChangeDefaultPicture);
             // 
             // rbMale
             // 
             this.rbMale.AutoSize = true;
+            this.rbMale.Checked = true;
             this.rbMale.Location = new System.Drawing.Point(142, 118);
             this.rbMale.Name = "rbMale";
             this.rbMale.Size = new System.Drawing.Size(58, 20);
@@ -470,7 +484,7 @@
             this.rbMale.Tag = "0";
             this.rbMale.Text = "Male";
             this.rbMale.UseVisualStyleBackColor = true;
-            this.rbMale.CheckedChanged += new System.EventHandler(this.ChangePicture);
+            this.rbMale.CheckedChanged += new System.EventHandler(this.ChangeDefaultPicture);
             // 
             // btnClose
             // 
@@ -540,7 +554,6 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // lblPersonID
             // 
@@ -549,6 +562,10 @@
             this.lblPersonID.Name = "lblPersonID";
             this.lblPersonID.Size = new System.Drawing.Size(0, 16);
             this.lblPersonID.TabIndex = 65;
+            // 
+            // error
+            // 
+            this.error.ContainerControl = this;
             // 
             // frmSavePerson
             // 
@@ -579,6 +596,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.error)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -630,5 +648,6 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lblPersonID;
+        private System.Windows.Forms.ErrorProvider error;
     }
 }

@@ -1,14 +1,12 @@
 ﻿using DVLD_Business_Layer;
 using DVLD_Presentation_Layer.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+
 
 namespace DVLD_Presentation_Layer
 {
@@ -61,14 +59,20 @@ namespace DVLD_Presentation_Layer
             cbCountry.Text = clsCountry.FindCountry(person.NationalityCountryID).CountryName;
 
             _ImagePath = person.ImagePath;
-            if (_ImagePath != null)
+            if (_ImagePath != null && File.Exists(_ImagePath))
                 pbPersonImage.Image = Image.FromFile(_ImagePath);
+        }
+
+        private void _UpdateAllowableAge()
+        {
+            dtpDateOfBirth.MaxDate = DateTime.Now.AddYears(-18);
         }
 
         private void frmSavePerson_Load(object sender, EventArgs e)
         {
-            rbMale.Checked = true;
             _LoadCountriesNameToComboBox();
+            cbCountry.SelectedIndex = 89;//Jordan
+            _UpdateAllowableAge();
 
         }
 
@@ -95,7 +99,6 @@ namespace DVLD_Presentation_Layer
             lblPersonID.Text = person.PersonID.ToString();
         }
 
-        
         private void _FillPersonFromForm()
         {
             person.NationalNo = txtNationalNo.Text;
@@ -115,10 +118,10 @@ namespace DVLD_Presentation_Layer
             person.NationalityCountryID = clsCountry.FindCountry(cbCountry.Text).ID;
         }
 
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             _FillPersonFromForm();
+
             if (person.Save())
             {
                 MessageBox.Show("Person saved successfully");
@@ -135,15 +138,18 @@ namespace DVLD_Presentation_Layer
             openFileDialog1.InitialDirectory = @"C:\";
             openFileDialog1.Title = "Set Image";
             openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
+            
 
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            { 
                 _ImagePath = openFileDialog1.FileName;
+            
                 pbPersonImage.Image = Image.FromFile(openFileDialog1.FileName);
             }
+
         }
 
-        private void ChangePicture(object sender, EventArgs e)
+        private void ChangeDefaultPicture(object sender, EventArgs e)
         {
             if (rbMale.Checked)
                 pbPersonImage.Image = Resources.Male_512;
@@ -151,5 +157,51 @@ namespace DVLD_Presentation_Layer
                 pbPersonImage.Image = Resources.Female_512;
 
         }
+
+        private void txtNationalNo_Validating(object sender, CancelEventArgs e)
+        {
+            if (clsPerson.IsExistingByNationalNo(txtNationalNo.Text))
+            {
+                e.Cancel = true;
+                txtNationalNo.Focus();
+                error.SetError(txtNationalNo, "National Number is Used For Another person");
+            }
+            else
+            {
+                e.Cancel = false;
+                error.SetError(txtNationalNo, "");
+            }
+           
+
+        }
+        
+       
+        private void EmptyBoxValidatling(object sender, EventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+            
+            if (string.IsNullOrEmpty(txt.Text))
+            {
+                error.SetError(txt, "it shouldn't be empty");
+            }
+            else
+            {
+                error.SetError(txt, "");
+            }
+
+        }
+
+        private void txtEmail_Validating(object sender, CancelEventArgs e)
+        {
+            if (!(txtEmail.Text.Contains("@gmail.com")))
+
+                error.SetError(txtEmail, "it not true format");
+
+            else
+                error.SetError(txtEmail, "");
+
+        }
+
+     
     }
 }

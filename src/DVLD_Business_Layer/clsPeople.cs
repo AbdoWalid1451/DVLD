@@ -1,6 +1,6 @@
 ﻿using DVLD_DataAccess_Layer;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
@@ -95,8 +95,27 @@ namespace DVLD_Business_Layer
                 return null;
         }
 
+        private string CopyPhotoToPhotosPlace(string SourcePath)
+        {
+            if (string.IsNullOrEmpty(SourcePath))
+                return null;
+
+            string destinationFolder = @"D:\programing\Abu-Hadhoud_Course\تاسيس 2\DVLD\assets\PeopleImages";
+
+            string destinationPath = Path.Combine(destinationFolder, Path.GetFileName(SourcePath));
+
+            if (!File.Exists(destinationPath))
+                File.Copy(SourcePath, destinationPath, true);
+
+            return destinationPath;
+        }
+
         private bool _AddNew()
         {
+            //Copy photo to right place and take its path
+         
+                ImagePath = CopyPhotoToPhotosPlace(ImagePath);
+
             this.PersonID = clsPeopleData.addNew(NationalNo, FirstName, SecondName
                 , ThirdName, LastName, DateOfBirth, Gendor, Address,
                 Phone, Email, NationalityCountryID
@@ -108,10 +127,23 @@ namespace DVLD_Business_Layer
 
         private bool _Update()
         {
-            return clsPeopleData.Update(PersonID, NationalNo, FirstName, SecondName
+            string OldImagePath = clsPerson.FindByID(PersonID).ImagePath;
+
+            ImagePath = CopyPhotoToPhotosPlace(ImagePath);
+
+            if( clsPeopleData.Update(PersonID, NationalNo, FirstName, SecondName
                 , ThirdName, LastName, DateOfBirth, Gendor, Address,
                 Phone, Email, NationalityCountryID
-               , ImagePath);
+               , ImagePath))
+
+            {     
+                if(File.Exists(OldImagePath))
+                    File.Delete(OldImagePath);
+                
+                return true; 
+            }
+        
+        return false;
         }
 
         public bool Save()
@@ -137,7 +169,18 @@ namespace DVLD_Business_Layer
 
         static public bool Delete(int ID)
         {
-            return clsPeopleData.Delete(ID);
+            string ImagePath = clsPerson.FindByID(ID).ImagePath;
+
+            if (clsPeopleData.Delete(ID))
+            {
+                if(ImagePath != null && File.Exists(ImagePath))
+                File.Delete(ImagePath);
+
+                  return true;
+                
+            }
+            else
+                { return false; }
         }
 
         static public DataTable GetAll()
@@ -145,9 +188,9 @@ namespace DVLD_Business_Layer
             return clsPeopleData.getAll();
         }
 
-        static public bool IsExisting(int ID)
+        static public bool IsExistingByNationalNo(string NationalNo)
         {
-            return clsPeopleData.IsExist(ID);
+            return clsPeopleData.IsExistByNationalNo(NationalNo);
         }
 
 

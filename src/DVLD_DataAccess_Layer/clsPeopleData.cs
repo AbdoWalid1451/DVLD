@@ -257,13 +257,13 @@ namespace DVLD_DataAccess_Layer
             return flag;
         }
 
-        static public bool IsExist(int PersonID)
+        static public bool IsExistByNationalNo(string NationalNo)
         {
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
-            string query = "Select found = 1 from Contacts Where ContactID = @ID";
+            string query = "Select found = 1 from People Where NationalNo = @NationalNo";
 
             SqlCommand cmd = new SqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@PersonID", PersonID);
+            cmd.Parameters.AddWithValue("@NationalNo", NationalNo);
 
             bool flag = false;
             try
@@ -287,6 +287,7 @@ namespace DVLD_DataAccess_Layer
             return flag;
         }
 
+        
 
     }
 }
