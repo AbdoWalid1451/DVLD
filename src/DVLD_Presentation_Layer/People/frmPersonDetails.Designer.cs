@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPersonDetails));
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.ctrlPersonInformation1 = new DVLD_Presentation_Layer.ctrlPersonInformation(_ID);
+            this.ctrlPersonInformation1 = new DVLD_Presentation_Layer.ctrlPersonInformation();
             this.SuspendLayout();
             // 
             // label1
@@ -61,7 +61,7 @@
             // 
             // ctrlPersonInformation1
             // 
-            this.ctrlPersonInformation1.Location = new System.Drawing.Point(0, 47);
+            this.ctrlPersonInformation1.Location = new System.Drawing.Point(2, 38);
             this.ctrlPersonInformation1.Name = "ctrlPersonInformation1";
             this.ctrlPersonInformation1.Size = new System.Drawing.Size(862, 356);
             this.ctrlPersonInformation1.TabIndex = 3;
@@ -78,7 +78,6 @@
             this.Name = "frmPersonDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Person Details";
-            this.Load += new System.EventHandler(this.frmPersonDetails_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

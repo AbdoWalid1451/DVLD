@@ -296,6 +296,7 @@
             this.ilblEditPersonInfo.TabIndex = 47;
             this.ilblEditPersonInfo.TabStop = true;
             this.ilblEditPersonInfo.Text = "Edit Person Info";
+            this.ilblEditPersonInfo.Visible = false;
             this.ilblEditPersonInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ilblEditPersonInfo_LinkClicked);
             // 
             // pbPersonImage
@@ -395,7 +396,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ctrlPersonInformation";
             this.Size = new System.Drawing.Size(862, 356);
-            this.Load += new System.EventHandler(this.ctrlPersonInformation_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();

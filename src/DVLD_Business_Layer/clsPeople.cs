@@ -1,14 +1,7 @@
 ﻿using DVLD_DataAccess_Layer;
 using System;
-using System.IO;
 using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace DVLD_Business_Layer
 {
@@ -73,7 +66,7 @@ namespace DVLD_Business_Layer
             Mode = enMode.Add;
         }
 
-        static public clsPerson FindByID(int PersonID)
+        static public clsPerson Find(int PersonID)
         {
             string NationalNo = "",
                 FName = "", SName = "", TName = "", LName = "", Email = "", Phone = "", Address = "";
@@ -95,26 +88,30 @@ namespace DVLD_Business_Layer
                 return null;
         }
 
-        private string CopyPhotoToPhotosPlace(string SourcePath)
+        static public clsPerson Find(string NationalNo)
         {
-            if (string.IsNullOrEmpty(SourcePath))
+            int PersonID = -1;
+            string  FName = "", SName = "", TName = "", LName = "", Email = "", Phone = "", Address = "";
+            DateTime DateOfBirth = DateTime.Now; int NationalityCountryID = -1; string ImagePath = "";
+            short Gendor = 0;
+
+
+            if (clsPeopleData.findByNationalNo(NationalNo, ref PersonID,  ref FName, ref SName
+                , ref TName, ref LName, ref DateOfBirth,
+                ref Gendor, ref Address
+                , ref Phone, ref Email, ref NationalityCountryID
+               , ref ImagePath))
+
+                return new clsPerson(PersonID, NationalNo, FName, SName
+                , TName, LName, DateOfBirth, Gendor, Address,
+                Phone, Email, NationalityCountryID
+               , ImagePath);
+            else
                 return null;
-
-            string destinationFolder = @"D:\programing\Abu-Hadhoud_Course\تاسيس 2\DVLD\assets\PeopleImages";
-
-            string destinationPath = Path.Combine(destinationFolder, Path.GetFileName(SourcePath));
-
-            if (!File.Exists(destinationPath))
-                File.Copy(SourcePath, destinationPath, true);
-
-            return destinationPath;
         }
 
         private bool _AddNew()
         {
-            //Copy photo to right place and take its path
-         
-                ImagePath = CopyPhotoToPhotosPlace(ImagePath);
 
             this.PersonID = clsPeopleData.addNew(NationalNo, FirstName, SecondName
                 , ThirdName, LastName, DateOfBirth, Gendor, Address,
@@ -127,23 +124,11 @@ namespace DVLD_Business_Layer
 
         private bool _Update()
         {
-            string OldImagePath = clsPerson.FindByID(PersonID).ImagePath;
-
-            ImagePath = CopyPhotoToPhotosPlace(ImagePath);
-
-            if( clsPeopleData.Update(PersonID, NationalNo, FirstName, SecondName
+            return clsPeopleData.Update(PersonID, NationalNo, FirstName, SecondName
                 , ThirdName, LastName, DateOfBirth, Gendor, Address,
                 Phone, Email, NationalityCountryID
-               , ImagePath))
+               , ImagePath);
 
-            {     
-                if(File.Exists(OldImagePath))
-                    File.Delete(OldImagePath);
-                
-                return true; 
-            }
-        
-        return false;
         }
 
         public bool Save()
@@ -169,18 +154,8 @@ namespace DVLD_Business_Layer
 
         static public bool Delete(int ID)
         {
-            string ImagePath = clsPerson.FindByID(ID).ImagePath;
-
-            if (clsPeopleData.Delete(ID))
-            {
-                if(ImagePath != null && File.Exists(ImagePath))
-                File.Delete(ImagePath);
-
-                  return true;
-                
-            }
-            else
-                { return false; }
+            return clsPeopleData.Delete(ID);
+         
         }
 
         static public DataTable GetAll()
@@ -188,9 +163,14 @@ namespace DVLD_Business_Layer
             return clsPeopleData.getAll();
         }
 
-        static public bool IsExistingByNationalNo(string NationalNo)
+        static public bool IsExisting(string NationalNo)
         {
             return clsPeopleData.IsExistByNationalNo(NationalNo);
+        }
+
+        static public bool IsExisting(int PersonID)
+        {
+            return clsPeopleData.IsExistByPersonID(PersonID);
         }
 
 

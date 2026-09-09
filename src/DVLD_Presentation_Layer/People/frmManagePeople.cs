@@ -1,6 +1,8 @@
 ﻿using DVLD_Business_Layer;
 using System;
+using System.Data;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DVLD_Presentation_Layer
 {
@@ -9,10 +11,12 @@ namespace DVLD_Presentation_Layer
         public frmManagePeople()
         {
             InitializeComponent();
+            cbFilterBy.SelectedIndex = 0;
         }
 
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
+
             _RefreshGridView();
         }
 
@@ -44,7 +48,7 @@ namespace DVLD_Presentation_Layer
 
                 if (MessageBox.Show("Are You sure to delete " + name, "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    string ImagePath =clsPerson.FindByID(id).ImagePath;
+                    string ImagePath =clsPerson.Find(id).ImagePath;
                     if ( clsPerson.Delete(id))
                     {
                         MessageBox.Show("Deleted Successfully");
@@ -93,5 +97,46 @@ namespace DVLD_Presentation_Layer
                 _RefreshGridView();
             }
         }
+
+        private void FilterGridView(string Filter,string Search)
+        {
+            int ID = 0; DataView dv = clsPerson.GetAll().DefaultView;
+
+            if(Filter == "None" || string.IsNullOrEmpty(Search))
+            {
+                dgvAllPeople.DataSource = dv;
+            }
+
+            else if (int.TryParse(Search, out ID))
+            {
+                dv.RowFilter = $"{Filter} = {Search}";
+                dgvAllPeople.DataSource = dv;
+            }
+
+            else
+            {
+                dv.RowFilter = $"{Filter} LIKE '{Search}%'";
+                dgvAllPeople.DataSource= dv;
+            }
+
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mtxtFilter.Text = "";
+          if(cbFilterBy.SelectedIndex == 0)
+                mtxtFilter.Visible = false;
+          else
+                mtxtFilter.Visible = true;
+
+        }
+
+        private void mtxtFilter_TextChanged(object sender, EventArgs e)
+        {
+            FilterGridView(cbFilterBy.Text.Replace(" ", ""), mtxtFilter.Text);
+        }
+
+       
     }
 }

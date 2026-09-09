@@ -12,13 +12,12 @@ namespace DVLD_Presentation_Layer
 {
     public partial class frmPersonDetails : Form
     {
-        private int _ID;
+
      
         public frmPersonDetails(int ID)
         {
-            _ID = ID;
             InitializeComponent(); 
-         
+          ctrlPersonInformation1.LoadPersonInfo(ID);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,9 +25,5 @@ namespace DVLD_Presentation_Layer
             this.Close();
         }
 
-        private void frmPersonDetails_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

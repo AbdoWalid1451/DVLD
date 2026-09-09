@@ -14,7 +14,6 @@ namespace DVLD_Presentation_Layer
     {
 
         clsPerson person;
-        string _ImagePath;
         enum enMode { Add, Edit }
 
         enMode Mode { get; set; }
@@ -32,7 +31,13 @@ namespace DVLD_Presentation_Layer
             else
             {
                 Mode = enMode.Edit;
-                person = clsPerson.FindByID(PersonID);
+                person = clsPerson.Find(PersonID);
+                if (person == null)
+                {
+                    MessageBox.Show("This personID not found ","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    this.Close();
+                    return;
+                }
                 _FillForm();
             }
         }
@@ -58,9 +63,8 @@ namespace DVLD_Presentation_Layer
             txtPhone.Text = person.Phone.ToString();
             cbCountry.Text = clsCountry.FindCountry(person.NationalityCountryID).CountryName;
 
-            _ImagePath = person.ImagePath;
-            if (_ImagePath != null && File.Exists(_ImagePath))
-                pbPersonImage.Image = Image.FromFile(_ImagePath);
+            if (!string.IsNullOrEmpty( person.ImagePath))
+                pbPersonImage.ImageLocation = person.ImagePath;
         }
 
         private void _UpdateAllowableAge()
@@ -73,6 +77,8 @@ namespace DVLD_Presentation_Layer
             _LoadCountriesNameToComboBox();
             cbCountry.SelectedIndex = 89;//Jordan
             _UpdateAllowableAge();
+            if(string.IsNullOrEmpty(person.ImagePath))
+            ilblRemaveImage.Visible = false;
 
         }
 
@@ -86,7 +92,6 @@ namespace DVLD_Presentation_Layer
             }
         }
 
-
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -99,8 +104,17 @@ namespace DVLD_Presentation_Layer
             lblPersonID.Text = person.PersonID.ToString();
         }
 
+        private bool ValidationData()
+        {
+            return string.IsNullOrEmpty(txtNationalNo.Text) && string.IsNullOrEmpty(txtFirstName.Text)
+                 && string.IsNullOrEmpty(txtSecondName.Text)
+                  && string.IsNullOrEmpty(txtLastName.Text) && string.IsNullOrEmpty(txtAddress.Text)
+                   && string.IsNullOrEmpty(txtPhone.Text);
+        }
+
         private void _FillPersonFromForm()
         {
+       
             person.NationalNo = txtNationalNo.Text;
             person.FirstName = txtFirstName.Text;
             person.SecondName = txtSecondName.Text;
@@ -114,18 +128,60 @@ namespace DVLD_Presentation_Layer
             person.Address = txtAddress.Text;
             person.Phone = txtPhone.Text;
             person.Email = txtEmail.Text;
-            person.ImagePath = _ImagePath;
+            person.ImagePath = pbPersonImage.ImageLocation;
             person.NationalityCountryID = clsCountry.FindCountry(cbCountry.Text).ID;
+
         }
+
+        private void _HandleImage()
+        {
+            if (pbPersonImage.ImageLocation == person.ImagePath)
+                return;
+
+            if(string.IsNullOrEmpty(pbPersonImage.ImageLocation))
+            {
+                if (!string.IsNullOrEmpty(person.ImagePath))
+                {
+                     File.Delete(person.ImagePath);
+
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(person.ImagePath))
+                {
+                   File.Delete(person.ImagePath);
+                 
+                }   
+                string source = pbPersonImage.ImageLocation;
+                clsUtil.CopyPhotoToPhotosPlace(ref source);
+                pbPersonImage.ImageLocation = source;
+            }
+
+        }
+
+        public delegate void dlgDataBack(int ID);
+
+        public event dlgDataBack DataBack;
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if(ValidationData())
+            {
+                MessageBox.Show("You should fill all data in thier boxes ","Info",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            _HandleImage();
+
             _FillPersonFromForm();
 
             if (person.Save())
             {
                 MessageBox.Show("Person saved successfully");
                 _UpdateFormToEdit();
+                DataBack?.Invoke(person.PersonID);
             }
             else
                 MessageBox.Show("Person failed to saved");
@@ -142,25 +198,30 @@ namespace DVLD_Presentation_Layer
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             { 
-                _ImagePath = openFileDialog1.FileName;
-            
-                pbPersonImage.Image = Image.FromFile(openFileDialog1.FileName);
+
+                pbPersonImage.ImageLocation = openFileDialog1.FileName;
+
+                ilblRemaveImage.Visible = true;
             }
 
         }
 
         private void ChangeDefaultPicture(object sender, EventArgs e)
         {
-            if (rbMale.Checked)
-                pbPersonImage.Image = Resources.Male_512;
-            else
-                pbPersonImage.Image = Resources.Female_512;
+            if (pbPersonImage.ImageLocation == null)
+            {
+                if (rbMale.Checked)
+                    pbPersonImage.Image = Resources.Male_512;
+                else
+                    pbPersonImage.Image = Resources.Female_512;
 
+                ilblRemaveImage.Visible = false;
+            }
         }
 
         private void txtNationalNo_Validating(object sender, CancelEventArgs e)
         {
-            if (clsPerson.IsExistingByNationalNo(txtNationalNo.Text))
+            if (clsPerson.IsExisting(txtNationalNo.Text))
             {
                 e.Cancel = true;
                 txtNationalNo.Focus();
@@ -175,7 +236,6 @@ namespace DVLD_Presentation_Layer
 
         }
         
-       
         private void EmptyBoxValidatling(object sender, EventArgs e)
         {
             TextBox txt = sender as TextBox;
@@ -202,6 +262,11 @@ namespace DVLD_Presentation_Layer
 
         }
 
-     
+        private void ilblRemaveImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ilblRemaveImage.Visible = false;
+            pbPersonImage.ImageLocation = null;
+            ChangeDefaultPicture( sender,  e);
+        }
     }
 }

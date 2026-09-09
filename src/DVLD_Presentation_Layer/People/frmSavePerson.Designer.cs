@@ -75,6 +75,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.lblPersonID = new System.Windows.Forms.Label();
             this.error = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ilblRemaveImage = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -167,7 +168,6 @@
             this.txtThirdName.Name = "txtThirdName";
             this.txtThirdName.Size = new System.Drawing.Size(157, 15);
             this.txtThirdName.TabIndex = 3;
-            this.txtThirdName.Leave += new System.EventHandler(this.EmptyBoxValidatling);
             // 
             // txtSecondName
             // 
@@ -240,7 +240,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(157, 15);
             this.txtEmail.TabIndex = 8;
-            this.txtEmail.Leave += new System.EventHandler(this.EmptyBoxValidatling);
             this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // txtNationalNo
@@ -305,6 +304,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ilblRemaveImage);
             this.groupBox1.Controls.Add(this.dtpDateOfBirth);
             this.groupBox1.Controls.Add(this.pictureBox10);
             this.groupBox1.Controls.Add(this.pictureBox8);
@@ -488,6 +488,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -552,9 +553,6 @@
             this.pictureBox11.TabIndex = 64;
             this.pictureBox11.TabStop = false;
             // 
-            // openFileDialog1
-            // 
-            // 
             // lblPersonID
             // 
             this.lblPersonID.AutoSize = true;
@@ -567,10 +565,23 @@
             // 
             this.error.ContainerControl = this;
             // 
+            // ilblRemaveImage
+            // 
+            this.ilblRemaveImage.AutoSize = true;
+            this.ilblRemaveImage.Location = new System.Drawing.Point(699, 287);
+            this.ilblRemaveImage.Name = "ilblRemaveImage";
+            this.ilblRemaveImage.Size = new System.Drawing.Size(100, 16);
+            this.ilblRemaveImage.TabIndex = 63;
+            this.ilblRemaveImage.TabStop = true;
+            this.ilblRemaveImage.Text = "Remove Image";
+            this.ilblRemaveImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ilblRemaveImage_LinkClicked);
+            // 
             // frmSavePerson
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(958, 530);
             this.Controls.Add(this.lblPersonID);
             this.Controls.Add(this.pictureBox11);
@@ -649,5 +660,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lblPersonID;
         private System.Windows.Forms.ErrorProvider error;
+        private System.Windows.Forms.LinkLabel ilblRemaveImage;
     }
 }
