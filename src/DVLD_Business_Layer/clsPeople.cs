@@ -91,7 +91,7 @@ namespace DVLD_Business_Layer
         static public clsPerson Find(string NationalNo)
         {
             int PersonID = -1;
-            string  FName = "", SName = "", TName = "", LName = "", Email = "", Phone = "", Address = "";
+            string  FName = "", SName = "", TName = "",LName = "", Email = "", Phone = "", Address = "";
             DateTime DateOfBirth = DateTime.Now; int NationalityCountryID = -1; string ImagePath = "";
             short Gendor = 0;
 

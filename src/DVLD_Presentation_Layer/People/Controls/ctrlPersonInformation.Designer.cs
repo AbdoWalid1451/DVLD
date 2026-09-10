@@ -395,7 +395,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Name = "ctrlPersonInformation";
-            this.Size = new System.Drawing.Size(862, 356);
+            this.Size = new System.Drawing.Size(830, 345);
+            this.Load += new System.EventHandler(this.ctrlPersonInformation_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();

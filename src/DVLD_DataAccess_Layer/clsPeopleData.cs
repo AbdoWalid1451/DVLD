@@ -132,7 +132,8 @@ namespace DVLD_DataAccess_Layer
 
                 if (reader.Read())
                 {
-                    NationalNo = (string)reader["PersonID"];
+                    NationalNo = (string)reader["NationalNo"];
+                    PersonID = (int)reader["PersonID"];
                     FName = (string)reader["FirstName"];
                     SName = (string)reader["SecondName"];
 

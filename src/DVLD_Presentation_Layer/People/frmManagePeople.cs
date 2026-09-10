@@ -1,6 +1,7 @@
 ﻿using DVLD_Business_Layer;
 using System;
 using System.Data;
+using System.IO;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -51,6 +52,7 @@ namespace DVLD_Presentation_Layer
                     string ImagePath =clsPerson.Find(id).ImagePath;
                     if ( clsPerson.Delete(id))
                     {
+                        File.Delete(ImagePath);
                         MessageBox.Show("Deleted Successfully");
                         _RefreshGridView();
 
@@ -119,24 +121,31 @@ namespace DVLD_Presentation_Layer
                 dgvAllPeople.DataSource= dv;
             }
 
-
+            lblRecords.Text = dv.Count.ToString();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mtxtFilter.Text = "";
+            txtFilter.Text = "";
           if(cbFilterBy.SelectedIndex == 0)
-                mtxtFilter.Visible = false;
+                txtFilter.Visible = false;
           else
-                mtxtFilter.Visible = true;
+                txtFilter.Visible = true;
 
         }
 
         private void mtxtFilter_TextChanged(object sender, EventArgs e)
         {
-            FilterGridView(cbFilterBy.Text.Replace(" ", ""), mtxtFilter.Text);
+            FilterGridView(cbFilterBy.Text.Replace(" ", ""), txtFilter.Text);
         }
 
-       
+        private void txtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cbFilterBy.Text == "Person ID" )
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+        }
     }
 }

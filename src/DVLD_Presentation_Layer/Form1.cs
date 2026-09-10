@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DVLD_Business_Layer;
+using DVLD_Presentation_Layer.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +24,34 @@ namespace DVLD_Presentation_Layer
             frmManagePeople frmPeople = new frmManagePeople();
             frmPeople.MdiParent = this;
             frmPeople.Show();
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageUsers frmUsers = new frmManageUsers();
+            frmUsers.MdiParent = this;
+            frmUsers.Show();
+        }
+
+        private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUserInfo info = new frmUserInfo(clsGlobal.CurrentUser.UserID);
+            info.ShowDialog();
+
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangePassword changePassword = new frmChangePassword(clsGlobal.CurrentUser.UserID);
+            changePassword.ShowDialog();
+        }
+
+        private void signToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin login = new frmLogin();
+            login.Show();
+            login.FormClosed +=(s,args) => this.Close();
         }
     }
 }

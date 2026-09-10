@@ -55,7 +55,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 81);
+            this.label1.Location = new System.Drawing.Point(6, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 18);
             this.label1.TabIndex = 2;
@@ -67,7 +67,8 @@
             this.groupBox1.Controls.Add(this.btnSearch);
             this.groupBox1.Controls.Add(this.txtSearch);
             this.groupBox1.Controls.Add(this.cbFilter);
-            this.groupBox1.Location = new System.Drawing.Point(3, 52);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(3, 16);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(789, 62);
             this.groupBox1.TabIndex = 6;
@@ -103,10 +104,11 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(188, 22);
             this.txtSearch.TabIndex = 2;
+            this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
             // 
             // ctrlPersonInformation1
             // 
-            this.ctrlPersonInformation1.Location = new System.Drawing.Point(-12, 108);
+            this.ctrlPersonInformation1.Location = new System.Drawing.Point(-15, 65);
             this.ctrlPersonInformation1.Name = "ctrlPersonInformation1";
             this.ctrlPersonInformation1.Size = new System.Drawing.Size(862, 356);
             this.ctrlPersonInformation1.TabIndex = 0;
@@ -117,13 +119,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ctrlPersonInformation1);
-            this.Controls.Add(this.label1);
             this.Name = "ctrlPersonCardWithFilter";
-            this.Size = new System.Drawing.Size(800, 441);
+            this.Size = new System.Drawing.Size(800, 406);
+            this.Load += new System.EventHandler(this.ctrlPersonCardWithFilter_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

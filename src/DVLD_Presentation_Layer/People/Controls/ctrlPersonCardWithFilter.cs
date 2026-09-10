@@ -19,6 +19,12 @@ namespace DVLD_Presentation_Layer.People.Controls
         public ctrlPersonCardWithFilter()
         {
             InitializeComponent();
+            cbFilter.SelectedIndex = 0;
+        }
+
+        private void ctrlPersonCardWithFilter_Load(object sender, EventArgs e)
+        {
+         
         }
         public void LoadPersonInfo(int  personID)
         {
@@ -28,23 +34,29 @@ namespace DVLD_Presentation_Layer.People.Controls
         }
         private void FindNow()
         {
-            switch (cbFilter.Text) {
-                case "Person ID":
-                    ctrlPersonInformation1.LoadPersonInfo(int.Parse(txtSearch.Text));
-                    break;
-                case "National No":
-                    ctrlPersonInformation1.LoadPersonInfo(txtSearch.Text);
-                    break;
-            }
+            if (!string.IsNullOrEmpty(txtSearch.Text))
+                switch (cbFilter.Text)
+                {
+                    case "Person ID":
+                        ctrlPersonInformation1.LoadPersonInfo(int.Parse(txtSearch.Text));
+                        break;
+                    case "National No":
+                        ctrlPersonInformation1.LoadPersonInfo(txtSearch.Text);
+                        break;
+                }
+            else
+                ctrlPersonInformation1.LoadPersonInfo(-1);
         }
   
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if(string.IsNullOrEmpty(txtSearch.Text))
             {
-                MessageBox.Show("Please Enter data to search");
+                MessageBox.Show("Please Enter data to search","Empty search",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
             }
             FindNow();
+            OnPersonSelected(PersonID);
         }
         private void TakeDataBack(int PersonID)
         {
@@ -56,7 +68,26 @@ namespace DVLD_Presentation_Layer.People.Controls
             frmSave.DataBack += TakeDataBack;
             frmSave.ShowDialog();
 
+                OnPersonSelected(PersonID);
+        }
+
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cbFilter.Text == "Person ID" )
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+        }
+
+        public event Action<int> PersonSelected;
+        protected virtual void OnPersonSelected(int obj)
+        {
+            Action<int> handler = PersonSelected;
+            if (handler != null)
+                handler(obj);
 
         }
+
     }
 }

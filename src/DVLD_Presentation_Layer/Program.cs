@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_Presentation_Layer.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace DVLD_Presentation_Layer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            Application.Run(new frmManageApplicationTypes());
         }
     }
 }

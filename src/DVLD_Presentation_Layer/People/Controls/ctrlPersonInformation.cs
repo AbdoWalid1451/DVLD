@@ -61,29 +61,69 @@ namespace DVLD_Presentation_Layer
             }
         }
 
+        private void _ResetPersonCard()
+        {
+            lblPersonID.Text = "";
+
+            lblName.Text = "???";
+
+            lblNationalNo.Text = "???";
+
+            lblGendor.Text = "???";
+
+            lblEmail.Text = "???";
+            lblAddress.Text = "???";
+            lblDateOfBirth.Text = "???";
+            lblPhone.Text = "???";
+            lblCountry.Text = "???";
+
+            ShowImage(null, 0);
+
+            ilblEditPersonInfo.Visible = false;
+            _PersonID = -1;
+            _Person = null;
+        } 
+
         public void LoadPersonInfo(int PersonID)
         {
             _PersonID =PersonID;
 
             if(PersonID == -1)
+            {
+                _ResetPersonCard();
+                MessageBox.Show("Person is not found", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
 
              _Person = clsPerson.Find(PersonID);
 
-            if(SelectedPersonInfo != null) 
+            if(SelectedPersonInfo != null)
+            {
             _FillPersonCard(_Person);
+                
+            }
+            else
+            {
+                MessageBox.Show("Person is not found","Not Found",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ResetPersonCard();
+            }
 
         }
 
         public void LoadPersonInfo(string NationalNo)
         {
              _Person = clsPerson.Find(NationalNo);
-
+            _PersonID = _Person.PersonID;
             if(SelectedPersonInfo != null)
             {
                 _PersonID = PersonID;
             _FillPersonCard(_Person);
 
+            }
+            else
+            {
+                MessageBox.Show("Person is not found", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ResetPersonCard();
             }
 
         }
@@ -97,5 +137,9 @@ namespace DVLD_Presentation_Layer
 
         }
 
+        private void ctrlPersonInformation_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
