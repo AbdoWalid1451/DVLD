@@ -24,7 +24,7 @@ namespace DVLD_Presentation_Layer
         private void _RefreshGridView()
         {
             dgvAllPeople.DataSource = clsPerson.GetAll();
-            lblRecords.Text = clsPerson.GetAll().Rows.Count.ToString();
+            lblRecords.Text = dgvAllPeople.Rows.Count.ToString();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

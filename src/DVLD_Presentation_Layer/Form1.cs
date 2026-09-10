@@ -53,5 +53,12 @@ namespace DVLD_Presentation_Layer
             login.Show();
             login.FormClosed +=(s,args) => this.Close();
         }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTypes frm = new frmManageApplicationTypes();
+            frm.MdiParent = this;
+            frm.Show();
+        }
     }
 }

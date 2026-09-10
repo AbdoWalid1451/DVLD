@@ -28,7 +28,7 @@ namespace DVLD_Presentation_Layer.Users
         {
             dgvManageUsers.DataSource = clsUser.GetAll();
             dgvManageUsers.Columns["FullName"].Width = 200;
-            lblRecords.Text = clsUser.GetAll().Rows.Count.ToString();
+            lblRecords.Text = dgvManageUsers.Rows.Count.ToString();
         }
 
         private void txtFilter_KeyPress(object sender, KeyPressEventArgs e)
