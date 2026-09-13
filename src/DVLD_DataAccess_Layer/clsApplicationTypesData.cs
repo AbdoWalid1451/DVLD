@@ -42,13 +42,14 @@ namespace DVLD_DataAccess_Layer
             return dt;
         }
 
-        static public bool findByID(int ApplicationTypeID, ref string ApplicationTypeTitle, ref Decimal ApplicationFees)
+        static public bool find( ref int ApplicationTypeID, ref string ApplicationTypeTitle, ref Decimal ApplicationFees)
         {
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
-            string query = "Select * from ApplicationTypes Where ApplicationTypeID = @ApplicationTypeID";
+            string query = "Select * from ApplicationTypes Where ApplicationTypeID = @ApplicationTypeID OR ApplicationTypeTitle = @ApplicationTypeTitle";
 
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
+            cmd.Parameters.AddWithValue("@ApplicationTypeTitle", ApplicationTypeTitle);
 
             bool flag = false;
             try
@@ -58,6 +59,7 @@ namespace DVLD_DataAccess_Layer
 
                 if (reader.Read())
                 {
+                    ApplicationTypeID = (int)reader["ApplicationTypeID"];
                     ApplicationTypeTitle = (string)reader["ApplicationTypeTitle"];
                     ApplicationFees = (Decimal)reader["ApplicationFees"];
 

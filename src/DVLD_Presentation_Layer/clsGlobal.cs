@@ -1,10 +1,10 @@
 ﻿using DVLD_Business_Layer;
 
-namespace DVLD_Presentation_Layer
+namespace DVLD_Business_Layer
 {
     public class clsGlobal
     {
-        static public  clsUser CurrentUser { get { return clsUser.Find(1); }  }
+        static public  clsUser CurrentUser {  get; private set; }
 
         public bool Login(string username, string password)
         {
@@ -15,7 +15,7 @@ namespace DVLD_Presentation_Layer
             if(!user.IsActive)
                 return false;
             
-          // CurrentUser = user;
+           CurrentUser = user;
 
             return true;
         }

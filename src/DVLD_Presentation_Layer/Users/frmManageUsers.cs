@@ -139,8 +139,7 @@ namespace DVLD_Presentation_Layer.Users
             if (dgvManageUsers.CurrentRow.Cells.Count > 0)
             {
                 int id = (int)dgvManageUsers.CurrentRow.Cells[0].Value;
-                string name = dgvManageUsers.CurrentRow.Cells[2].Value.ToString() + " "
-                    + dgvManageUsers.CurrentRow.Cells[3].Value.ToString();
+                string name =  dgvManageUsers.CurrentRow.Cells[3].Value.ToString();
 
                 if (MessageBox.Show("Are You sure to delete " + name, "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {

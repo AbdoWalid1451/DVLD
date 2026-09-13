@@ -41,10 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsApplication.cs" />
     <Compile Include="clsApplicationType.cs" />
     <Compile Include="clsCountry.cs" />
+    <Compile Include="clsDriver.cs" />
     <Compile Include="clsGlobal.cs" />
+    <Compile Include="clsLDLApplication.cs" />
+    <Compile Include="clsLicenseClass.cs" />
     <Compile Include="clsPeople.cs" />
+    <Compile Include="clsScheduleTest.cs" />
     <Compile Include="clsTestType.cs" />
     <Compile Include="clsUser.cs" />
     <Compile Include="clsUtil.cs" />

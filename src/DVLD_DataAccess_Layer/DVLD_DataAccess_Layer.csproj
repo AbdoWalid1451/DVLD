@@ -41,9 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsApplicationData.cs" />
     <Compile Include="clsApplicationTypesData.cs" />
     <Compile Include="clsCountryData.cs" />
+    <Compile Include="clsDriverData.cs" />
+    <Compile Include="clsLDLAppData.cs" />
+    <Compile Include="clsLicenseClassData.cs" />
     <Compile Include="clsPeopleData.cs" />
+    <Compile Include="clsScheduleTestData.cs" />
     <Compile Include="clsSettings.cs" />
     <Compile Include="clsTestTypeData.cs" />
     <Compile Include="clsUserData.cs" />

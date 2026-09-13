@@ -28,7 +28,19 @@ namespace DVLD_Business_Layer
             string ApplicationTypeTitle = ""; Decimal ApplicationFees = -1;
 
 
-            if (clsApplicationTypesData.findByID(ApplicationTypeID, ref ApplicationTypeTitle, ref ApplicationFees))
+            if (clsApplicationTypesData.find(ref ApplicationTypeID, ref ApplicationTypeTitle, ref ApplicationFees))
+
+                return new clsApplicationType(ApplicationTypeID, ApplicationTypeTitle,ApplicationFees);
+            else
+                return null;
+        }
+        static public clsApplicationType Find(string ApplicationTypeTitle)
+        {
+
+            int ApplicationTypeID = -1; Decimal ApplicationFees = -1;
+
+
+            if (clsApplicationTypesData.find(ref ApplicationTypeID, ref ApplicationTypeTitle, ref ApplicationFees))
 
                 return new clsApplicationType(ApplicationTypeID, ApplicationTypeTitle,ApplicationFees);
             else

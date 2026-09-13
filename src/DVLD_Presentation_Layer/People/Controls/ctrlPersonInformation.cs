@@ -113,10 +113,10 @@ namespace DVLD_Presentation_Layer
         public void LoadPersonInfo(string NationalNo)
         {
              _Person = clsPerson.Find(NationalNo);
-            _PersonID = _Person.PersonID;
+          
             if(SelectedPersonInfo != null)
             {
-                _PersonID = PersonID;
+             _PersonID = _Person.PersonID;
             _FillPersonCard(_Person);
 
             }

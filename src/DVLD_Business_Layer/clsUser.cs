@@ -1,12 +1,5 @@
 ﻿using DVLD_DataAccess_Layer;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Net;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DVLD_Business_Layer
 {

@@ -16,6 +16,7 @@ namespace DVLD_Presentation_Layer.People.Controls
         public int PersonID { get { return ctrlPersonInformation1.PersonID; } }
         public clsPerson SelectedPersonInfo { get { return ctrlPersonInformation1.SelectedPersonInfo; } }
 
+        public GroupBox Filter {get { return gbFilter; } set { gbFilter = Filter; } }
         public ctrlPersonCardWithFilter()
         {
             InitializeComponent();

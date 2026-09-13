@@ -1,4 +1,6 @@
 ﻿using DVLD_Business_Layer;
+using DVLD_Presentation_Layer.Applications;
+using DVLD_Presentation_Layer.Drivers;
 using DVLD_Presentation_Layer.Users;
 using System;
 using System.Collections.Generic;
@@ -57,6 +59,34 @@ namespace DVLD_Presentation_Layer
         private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageApplicationTypes frm = new frmManageApplicationTypes();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTestTypes frm = new frmManageTestTypes();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddNewLDLApp frm = new frmAddNewLDLApp(-1);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void localDrivingLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageLDLApp frm = new frmManageLDLApp();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageDrivers frm = new frmManageDrivers();
             frm.MdiParent = this;
             frm.Show();
         }
