@@ -107,8 +107,8 @@ namespace DVLD_DataAccess_Layer
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
             string query = @"Update Applications 
                               set ApplicantPersonID = @ApplicantPersonID, 
-                                AppDate = @AppDate,
-                                AppTypeID = @AppTypeID,
+                                ApplicationDate = @AppDate,
+                                ApplicationTypeID = @AppTypeID,
                                ApplicationStatus = @ApplicationStatus,
                                LastStatusDate =@LastStatusDate,
                                PaidFees =@PaidFees,
@@ -147,17 +147,20 @@ namespace DVLD_DataAccess_Layer
             return flag;
         }
 
-        static public bool Cancel(int ApplicationID)
+        static public bool ChangeStatus(int ApplicationID,int ApplicationStatus)
         {
 
 
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
             string query = @"Update Applications 
-                              set ApplicationStatus = 2
+                              set ApplicationStatus = @ApplicationStatus,
+                                    LastStatusDate = @LastStatusDate
                               Where ApplicationID = @ApplicationID";
 
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+            cmd.Parameters.AddWithValue("@ApplicationStatus", ApplicationStatus);
+            cmd.Parameters.AddWithValue("@LastStatusDate", DateTime.Now);
 
 
 

@@ -43,7 +43,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.gbTestType = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -51,7 +51,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gbTestType.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
@@ -181,7 +181,7 @@
             // gbTestType
             // 
             this.gbTestType.Controls.Add(this.label5);
-            this.gbTestType.Controls.Add(this.pictureBox3);
+            this.gbTestType.Controls.Add(this.pbImage);
             this.gbTestType.Controls.Add(this.label1);
             this.gbTestType.Controls.Add(this.label);
             this.gbTestType.Controls.Add(this.dateTimePicker1);
@@ -202,10 +202,11 @@
             this.gbTestType.Controls.Add(this.lblDLAppID);
             this.gbTestType.Location = new System.Drawing.Point(14, 16);
             this.gbTestType.Name = "gbTestType";
-            this.gbTestType.Size = new System.Drawing.Size(426, 496);
+            this.gbTestType.Size = new System.Drawing.Size(480, 496);
             this.gbTestType.TabIndex = 93;
             this.gbTestType.TabStop = false;
             this.gbTestType.Text = "Test Type";
+            this.gbTestType.Enter += new System.EventHandler(this.gbTestType_Enter);
             // 
             // label5
             // 
@@ -218,14 +219,14 @@
             this.label5.TabIndex = 94;
             this.label5.Text = "Schedule Test";
             // 
-            // pictureBox3
+            // pbImage
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(143, 21);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(175, 118);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 93;
-            this.pictureBox3.TabStop = false;
+            this.pbImage.Location = new System.Drawing.Point(143, 21);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(175, 118);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbImage.TabIndex = 93;
+            this.pbImage.TabStop = false;
             // 
             // pictureBox5
             // 
@@ -293,11 +294,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbTestType);
             this.Name = "ctrlSchedule_Test";
-            this.Size = new System.Drawing.Size(455, 528);
+            this.Size = new System.Drawing.Size(511, 528);
             this.Load += new System.EventHandler(this.ctrlSchedule_Test_Load);
             this.gbTestType.ResumeLayout(false);
             this.gbTestType.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
@@ -330,6 +331,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.GroupBox gbTestType;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pbImage;
     }
 }

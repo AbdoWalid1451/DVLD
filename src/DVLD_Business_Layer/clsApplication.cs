@@ -123,9 +123,9 @@ namespace DVLD_Business_Layer
             return clsApplicationData.Delete(ID);
 
         }
-        static public bool Cancel(int ID)
+        static public bool ChangeStatus(int ID ,enApplicationStatus status)
         {
-            return clsApplicationData.Cancel(ID);
+            return clsApplicationData.ChangeStatus(ID ,(int) status);
 
         }
 

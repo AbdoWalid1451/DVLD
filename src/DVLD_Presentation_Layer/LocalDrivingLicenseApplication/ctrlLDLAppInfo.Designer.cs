@@ -195,6 +195,7 @@
             this.Controls.Add(this.ctrlApplicationCard1);
             this.Name = "ctrlLDLAppInfo";
             this.Size = new System.Drawing.Size(888, 404);
+            this.Load += new System.EventHandler(this.ctrlLDLAppInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();

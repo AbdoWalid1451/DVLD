@@ -24,7 +24,7 @@ namespace DVLD_Presentation_Layer.LocalDrivingLicenseApplication
 
                 lblDLAppID.Text = LDLApp.LDLAppID.ToString();
                 lblLicensClass.Text = clsLicenseClass.Find(LDLApp.LicenseClassID).ClassName.ToString();
-                lblpassedTests.Text = "??";
+                lblpassedTests.Text = clsTest.TestsPassedByLDLAppID(LDLApp.LDLAppID).ToString();
 
                 ilblShowLicenseInfo.Visible = true;
             }
@@ -69,6 +69,11 @@ namespace DVLD_Presentation_Layer.LocalDrivingLicenseApplication
         }
 
         private void ilblShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void ctrlLDLAppInfo_Load(object sender, System.EventArgs e)
         {
 
         }

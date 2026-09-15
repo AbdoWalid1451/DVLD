@@ -25,13 +25,37 @@ namespace DVLD_Presentation_Layer.TestAppointments
             _LDLAppID = LDLAppID;
             _TestTypeID = TestTypeID;
 
-            if(TestAppID == -1)
-            TestApp = clsScheduleTest.Find(TestAppID);
+            if(TestAppID != -1)
+            {
+                TestApp = clsScheduleTest.Find(TestAppID);
+                Mode = enMode.Update;
+
+
+            }
             else
+            {
                 TestApp = new clsScheduleTest();
+                Mode = enMode.Add;
+            }
+
+            if(clsScheduleTest.IsThereAppointment( LDLAppID, TestTypeID,true))
+            {
+                Mode = enMode.retake;
+                TestApp = new clsScheduleTest();
+            }
+
+
 
         }
         
+        public void InCaseRetakeTest()
+        {
+            gbRetakeTest.Enabled = true;
+            lblRAppFees.Text = clsApplicationType.Find("Retake Test").ApplicationFees.ToString();
+            lblTotalFees.Text = (decimal.Parse(lblRAppFees.Text) 
+                + clsTestType.Find(_TestTypeID).TestTypeFees).ToString();
+        }
+
 
         private void frmAddTestAppointment_Load(object sender, EventArgs e)
         {
@@ -40,8 +64,9 @@ namespace DVLD_Presentation_Layer.TestAppointments
             {
                 ctrlSchedule_Test1.dtDate = TestApp.AppointmentDate;
             }
-           
 
+            if (Mode == enMode.retake)
+                InCaseRetakeTest();
         }
 
 
@@ -52,32 +77,63 @@ namespace DVLD_Presentation_Layer.TestAppointments
 
         private void _FillTestAppointmentFirstTime()
         {
+            TestApp.LDLAppID = _LDLAppID;
             TestApp.TestTypeID = _TestTypeID;
-            TestApp.LDLAppID = _TestTypeID;
             TestApp.PaidFees = clsTestType.Find(_TestTypeID).TestTypeFees;
             TestApp.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+        }
+
+        private int MakeAppForRetake()
+        {
+            clsApplication application = new clsApplication();
+
+            application.ApplicantPersonID = clsLDLApplication.Find(_LDLAppID).ApplicationInfo.ApplicantPersonID;
+
+            application.AppDate = DateTime.Now;
+            application.AppTypeID = clsApplicationType.Find("Retake Test").ApplicationTypeID;
+            application.ApplicationStatus = clsApplication.enApplicationStatus.New;
+            application.LastStatusDate = DateTime.Now;
+            application.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+
+            application.Save();
+
+            return application.ApplicationID;
+
+        }
+
+        private void _FillRetakeTestAppointment()
+        {
+
+            TestApp.RetakeTestAppID = MakeAppForRetake();
+            _FillTestAppointmentFirstTime();
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             TestApp.AppointmentDate =  ctrlSchedule_Test1.dtDate;
 
-            if(Mode == enMode.Add )
-            {
+            if (Mode == enMode.Add)
                 _FillTestAppointmentFirstTime();
-            }
+            
+            else if (Mode == enMode.retake)
+                _FillRetakeTestAppointment();
 
-
-            if(TestApp.Save())
+            if (TestApp.Save())
             {
-                MessageBox.Show("Test Appointment Saved Successfully","Saved",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Test Appointment Saved Successfully", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Failed to Saved","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Failed to Saved", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
         private void ctrlSchedule_Test1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

@@ -1,6 +1,7 @@
 ﻿using DVLD_Business_Layer;
 using DVLD_Presentation_Layer.Applications;
 using DVLD_Presentation_Layer.Drivers;
+using DVLD_Presentation_Layer.lnternationalLicenseApplication;
 using DVLD_Presentation_Layer.Users;
 using System;
 using System.Collections.Generic;
@@ -87,6 +88,20 @@ namespace DVLD_Presentation_Layer
         private void driversToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageDrivers frm = new frmManageDrivers();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void internationLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddInternationLicenseApp frm = new frmAddInternationLicenseApp();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void internationalLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageInterLicenseApp frm = new frmManageInterLicenseApp();
             frm.MdiParent = this;
             frm.Show();
         }

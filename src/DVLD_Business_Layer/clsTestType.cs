@@ -43,6 +43,11 @@ namespace DVLD_Business_Layer
 
         }
 
+        static public int TestsPassedByLDLAppID(int LDLAppID)
+        {
+            return clsTestData.TestsPassedByLDLAppID(LDLAppID);
+        }
+
         static public DataTable GetAll()
         {
             return clsTestTypeData.getAll();

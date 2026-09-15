@@ -126,11 +126,18 @@ namespace DVLD_Presentation_Layer
                     return true;
                 }
 
-            if (clsLDLApplication.IsAlreadyExist(ctrlPersonCardWithFilter1.PersonID,LDLApplication.LicenseClassID))
+            if (clsLicense.IsPersonHaveLicense(ctrlPersonCardWithFilter1.PersonID,LDLApplication.LicenseClassID))
             {
-                MessageBox.Show("You should select a person first", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("this person already have that license", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
+
+            if (clsLDLApplication.IsAlreadyExist(ctrlPersonCardWithFilter1.PersonID,LDLApplication.LicenseClassID))
+            {
+                MessageBox.Show("this person already have a localDrivingApplication", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+
             return false;
         }
 

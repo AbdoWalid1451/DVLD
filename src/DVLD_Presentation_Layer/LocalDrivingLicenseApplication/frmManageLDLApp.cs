@@ -1,4 +1,5 @@
 ﻿using DVLD_Business_Layer;
+using DVLD_Presentation_Layer.Licenses;
 using DVLD_Presentation_Layer.LocalDrivingLicenseApplication;
 using DVLD_Presentation_Layer.TestAppointments;
 using DVLD_Presentation_Layer.Users;
@@ -183,7 +184,7 @@ namespace DVLD_Presentation_Layer.Applications
 
                 if (MessageBox.Show("Are You sure to Cancel " + name, "Canceled", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    if (clsApplication.Cancel(clsLDLApplication.Find(id).ApplicationID))
+                    if (clsApplication.ChangeStatus(clsLDLApplication.Find(id).ApplicationID,clsApplication.enApplicationStatus.Canceled))
                     {
                         MessageBox.Show("Canceled Successfully");
                         _RefreshGridView();
@@ -255,7 +256,10 @@ namespace DVLD_Presentation_Layer.Applications
                     case 2:
                         EditEnableInTests(false, false, true); break;
                     case 3:
-                        EditEnableInTests(false, false, false); break;
+                        EditEnableInTests(false, false, false);
+                        ScehduleToolStripMenuItem.Enabled = false;
+                        issueDrivingLisenceToolStripMenuItem.Enabled = true;
+                        break;
 
 
                 }
@@ -266,9 +270,79 @@ namespace DVLD_Presentation_Layer.Applications
         {
             TestsLogic();
 
+            string status = (string)dgvAllLDLApp.CurrentRow.Cells[6].Value;
+
+            switch (status)
+            {
+                case "New":
+                    issueDrivingLisenceToolStripMenuItem.Enabled = false;
+                    showLicenseToolStripMenuItem.Enabled = false;
+
+                    editToolStripMenuItem.Enabled = true;
+                    deleteToolStripMenuItem.Enabled = true;
+                    cancelApplicationToolStripMenuItem.Enabled = true;
+                    ScehduleToolStripMenuItem.Enabled = true;
+                
+                    TestsLogic();
+                    break;
+                case "Canceled":
+                    editToolStripMenuItem.Enabled = false;
+                    deleteToolStripMenuItem.Enabled = true;
+                    cancelApplicationToolStripMenuItem.Enabled = false;
+                    ScehduleToolStripMenuItem.Enabled = false;
+                    EditEnableInTests(false, false, false);
+                    issueDrivingLisenceToolStripMenuItem.Enabled = false;
+                    showLicenseToolStripMenuItem.Enabled = false;
+                    break;
+                case "Completed":
+                    editToolStripMenuItem.Enabled = false;
+                    deleteToolStripMenuItem.Enabled = false;
+                    cancelApplicationToolStripMenuItem.Enabled = false;
+                    ScehduleToolStripMenuItem.Enabled = false;
+                    EditEnableInTests(false, false, false);
+                    issueDrivingLisenceToolStripMenuItem.Enabled = false;
+                    showLicenseToolStripMenuItem.Enabled = true;
+                    break;
+              
+
+            }
+
+            
+
         }
 
 
+        private void issueDrivingLisenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvAllLDLApp.CurrentRow.Cells.Count > 0)
+            {
+                int id = (int)dgvAllLDLApp.CurrentRow.Cells[0].Value;
+                frmIssueDriverLicenseForTheFirstTime frm = new frmIssueDriverLicenseForTheFirstTime(id);
+                frm.ShowDialog();
+                _RefreshGridView();
+            }
+        }
 
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvAllLDLApp.CurrentRow.Cells.Count > 0)
+            {
+                int id = (int)dgvAllLDLApp.CurrentRow.Cells[0].Value;
+                frmDriverLicenseInfo frm = new frmDriverLicenseInfo(id);
+                frm.ShowDialog();
+                _RefreshGridView();
+            }
+        }
+
+        private void sHowPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvAllLDLApp.CurrentRow.Cells.Count > 0)
+            {
+                string NationalNo = (string)dgvAllLDLApp.CurrentRow.Cells[2].Value;
+                frmLicenseHistory frm = new frmLicenseHistory(clsPerson.Find(NationalNo).PersonID);
+                frm.ShowDialog();
+                _RefreshGridView();
+            }
+        }
     }
 }

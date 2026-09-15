@@ -44,12 +44,16 @@
     <Compile Include="clsApplicationData.cs" />
     <Compile Include="clsApplicationTypesData.cs" />
     <Compile Include="clsCountryData.cs" />
+    <Compile Include="clsDetainedLicenseData.cs" />
     <Compile Include="clsDriverData.cs" />
+    <Compile Include="clsInternationalLicenseData.cs" />
     <Compile Include="clsLDLAppData.cs" />
     <Compile Include="clsLicenseClassData.cs" />
+    <Compile Include="clsLicenseData.cs" />
     <Compile Include="clsPeopleData.cs" />
     <Compile Include="clsScheduleTestData.cs" />
     <Compile Include="clsSettings.cs" />
+    <Compile Include="clsTestData.cs" />
     <Compile Include="clsTestTypeData.cs" />
     <Compile Include="clsUserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

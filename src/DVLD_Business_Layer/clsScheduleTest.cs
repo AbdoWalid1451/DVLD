@@ -133,9 +133,9 @@ namespace DVLD_Business_Layer
             return clsScheduleTestData.LockedTest(TestAppointmentID);
         }
 
-        static public bool IsThereActiveAppointment(int LDLAppID, int TestTypeID)
+        static public bool IsThereAppointment(int LDLAppID, int TestTypeID,bool IsLooked)
         {
-            return clsScheduleTestData.IsThereActiveAppointment(LDLAppID, TestTypeID);
+            return clsScheduleTestData.IsThereAppointment(LDLAppID, TestTypeID, IsLooked);
         }
 
 

@@ -11,7 +11,7 @@ namespace DVLD_DataAccess_Layer
                              , ref bool IsLocked, ref int RetakeTestAppID)
         {
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
-            string query = "Select * from Applications Where TestAppointmentID = @TestAppointmentID";
+            string query = "Select * from TestAppointments Where TestAppointmentID = @TestAppointmentID";
 
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
@@ -243,16 +243,17 @@ namespace DVLD_DataAccess_Layer
             return dt;
         }
 
-        static public bool IsThereActiveAppointment(int LDLAppID, int TestTypeID)
+        static public bool IsThereAppointment(int LDLAppID, int TestTypeID ,bool IsLocked)
         {
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
             string query = "Select found = 1 from TestAppointments Where" +
-                "  LocalDrivingLicenseApplicationID =@LDLAppID And TestTypeID = @TestTypeID And IsLocked = 0";
+                "  LocalDrivingLicenseApplicationID =@LDLAppID And TestTypeID = @TestTypeID And IsLocked = @IsLocked";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
             cmd.Parameters.AddWithValue("@LDLAppID", LDLAppID);
             cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            cmd.Parameters.AddWithValue("@IsLocked", IsLocked);
 
             bool flag = false;
             try

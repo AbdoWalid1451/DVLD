@@ -54,7 +54,7 @@ namespace DVLD_DataAccess_Layer
 
             SqlConnection connection = new SqlConnection(clsSettings.ConnectionString);
             string query = "Insert Into Drivers " +
-                "Values (@PersonID, @CreatedUser,@CreatedByUserID)" +
+                "Values (@PersonID,@CreatedByUserID, @CreatedDate)" +
                 "Select Scope_Identity();";
 
             SqlCommand cmd = new SqlCommand(query, connection);
