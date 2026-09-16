@@ -1,16 +1,10 @@
-﻿using DVLD_Business_Layer;
+﻿
 using DVLD_Presentation_Layer.Applications;
+using DVLD_Presentation_Layer.Detain_License;
 using DVLD_Presentation_Layer.Drivers;
 using DVLD_Presentation_Layer.lnternationalLicenseApplication;
 using DVLD_Presentation_Layer.Users;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_Presentation_Layer
@@ -102,6 +96,41 @@ namespace DVLD_Presentation_Layer
         private void internationalLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageInterLicenseApp frm = new frmManageInterLicenseApp();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void renewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRenewLicenseApplication frm = new frmRenewLicenseApplication();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void replacementForLostOrDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplacemtOrLostLicense frm = new frmReplacemtOrLostLicense();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageDetainedLicenses frm = new frmManageDetainedLicenses();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void detainLicensesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmDetainLicense frm = new frmDetainLicense();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedlicense frm = new frmReleaseDetainedlicense();
             frm.MdiParent = this;
             frm.Show();
         }

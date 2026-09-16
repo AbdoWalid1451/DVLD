@@ -24,6 +24,12 @@ namespace DVLD_Presentation_Layer.Licenses
 
         public GroupBox Filter { get { return gbFilter; } set { gbFilter = Filter; } }
 
+        public void Search(int licenseID)
+        {
+            txtLicenseID.Text = licenseID.ToString();
+            Add();
+        }
+
         private void ctrlDriverLicenseInfoWithFilter_Load(object sender, EventArgs e)
         {
 
@@ -38,8 +44,14 @@ namespace DVLD_Presentation_Layer.Licenses
                 }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void Add()
         {
+            if(string.IsNullOrEmpty(txtLicenseID.Text))
+            {
+                MessageBox.Show("Enter License ID first","InValid",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             ctrlLicenseInfo1.LoadLicenseInfoByLicenseID(int.Parse(txtLicenseID.Text));
             _license = ctrlLicenseInfo1.license;
             if (_license != null)
@@ -47,6 +59,10 @@ namespace DVLD_Presentation_Layer.Licenses
                 if (OnLicenseSelected != null)
                     LicenseSelected(_license.LicenseID);
             }
+        }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Add();
 
         }
 

@@ -1,4 +1,5 @@
 ﻿using DVLD_Presentation_Layer.Applications;
+using DVLD_Presentation_Layer.Detain_License;
 using DVLD_Presentation_Layer.Drivers;
 using DVLD_Presentation_Layer.Users;
 using System;
@@ -19,7 +20,7 @@ namespace DVLD_Presentation_Layer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            Application.Run(new frmLogin());
         }
     }
 }

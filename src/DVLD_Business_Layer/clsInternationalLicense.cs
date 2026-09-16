@@ -82,8 +82,6 @@ namespace DVLD_Business_Layer
 
         }
 
-
-
         public bool Save()
         {
 

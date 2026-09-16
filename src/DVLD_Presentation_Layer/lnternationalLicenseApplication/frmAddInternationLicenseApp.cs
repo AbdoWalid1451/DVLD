@@ -136,5 +136,10 @@ namespace DVLD_Presentation_Layer.lnternationalLicenseApplication
             frmInternationalLicenseInfo info = new frmInternationalLicenseInfo(internationalLicense.InternationalLicenseID);
                 info.ShowDialog();
         }
+
+        private void ctrlDriverLicenseInfoWithFilter1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

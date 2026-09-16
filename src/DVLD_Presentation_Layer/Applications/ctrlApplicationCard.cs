@@ -93,5 +93,10 @@ namespace DVLD_Presentation_Layer.Applications
             _FillApplicationCard(ApplicationInfo);
 
         }
+
+        private void ctrlApplicationCard_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

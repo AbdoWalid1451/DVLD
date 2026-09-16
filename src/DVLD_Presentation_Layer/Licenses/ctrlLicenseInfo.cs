@@ -29,7 +29,7 @@ namespace DVLD_Presentation_Layer.Licenses
             clsLDLApplication LDLApp = clsLDLApplication.Find(LDLAppID);
             if (LDLApp == null)
             {
-                _Reset();
+                LoadLicenseInfoByLicenseID(LDLAppID);
                 return;
             }
 
